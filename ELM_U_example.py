@@ -31,7 +31,7 @@ print(elm.score(X_test_scaled, y_test))
 
 ### Pipeline and Gridsearch cross-validation
 pipe = make_pipeline(MinMaxScaler(), ELMRegressor())
-param_grid = {'elmregressor__n_neurons' : range(1,30)}
+param_grid = {'elmregressor__n_neurons' : range(1,200)}
 grid = GridSearchCV(pipe, param_grid=param_grid, cv=5)
 grid.fit(X_train,y_train)
 y_predict = grid.predict(X_test)
@@ -42,11 +42,8 @@ results.head(15)
 results['mean_test_score']
 
 ### ELMUncertainty (in progress !!!)
-
-
-
 pipe = make_pipeline(MinMaxScaler(), ELMUncertainty(n_estimators=5))
-param_grid = {'elmuncertainty__n_neurons' : range(1,30)}
+param_grid = {'elmuncertainty__n_neurons' : range(1,200)}
 grid = GridSearchCV(pipe, param_grid=param_grid, cv=5)
 grid.fit(X_train,y_train)
 
